@@ -1,0 +1,24 @@
+{
+  "name": "hexo-migrator-tumblr",
+  "version": "0.0.1",
+  "description": "Migrator plugin for Hexo to migrate from Tumblr",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": {
+    "type": "MIT",
+    "url": "https://raw.github.com/hexojs/hexo-migrator-tumblr/master/LICENSE"
+  },
+  "keywords": [
+    "hexo",
+    "tumblr",
+    "migrator"
+  ],
+  "dependencies": {
+    "tumblr.js": "0.0.4",
+    "to-markdown": "0.0.2",
+    "moment": "~2.8.3"
+  }
+}
