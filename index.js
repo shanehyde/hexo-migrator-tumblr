@@ -1,15 +1,12 @@
 var tomd = require('to-markdown').toMarkdown,
 	tumblr = require('tumblr.js'),
+  async = require('async'),
 	moment = require('moment'),
   util = hexo.util,
   file = util.file2;
 
-var capitalize = function(str){
-  return str[0].toUpperCase() + str.substring(1);
-};
-
 hexo.extend.migrator.register('tumblr', function(args, callback) {
-  var log = hexo.log;
+  var log = hexo.log, post = hexo.post;
 
   var blogname = args._.shift();
   var key = args._.shift();
@@ -22,7 +19,7 @@ hexo.extend.migrator.register('tumblr', function(args, callback) {
       callback(err);
     }
 
-    var posts = {}
+    var posts = []
 
     resp.posts.forEach( function(post) {
 
@@ -39,10 +36,10 @@ hexo.extend.migrator.register('tumblr', function(args, callback) {
       if(post.source_url) {
         p.data.tumblr_source_url = post.source_url;
       }
-      if(post.slug) {
-        p.data.slug = post.slug;
-      }
+      p.data.slug = post.slug || 'tumblr-'+post.id;
       p.data.tags = post.tags;
+
+      p.data.title = p.data.slug;
 
       log.i('Processing %s', id)
 
@@ -54,8 +51,18 @@ hexo.extend.migrator.register('tumblr', function(args, callback) {
           p.attach.push(photo.original_size.url);
         })
       }
-      log.i(p);
+      
+      if(p.data.content) {
+        posts.push(p.data);
+      }
     });
-    callback();
+    async.each(posts, function(item, next){
+      post.create(item, next);
+    }, function(err) {
+      if (err) return callback(err);
+
+      log.i('%d posts migrated.', posts.length);
+      callback();
+    });
   })
 });
