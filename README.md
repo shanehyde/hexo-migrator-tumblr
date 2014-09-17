@@ -1,6 +1,10 @@
 ## WIP ##
 
-Do not use yet.
+Mostly working for text and photo Tumblog entries.
+
+This plugin requires the [hexo-tag-asset-res](https://github.com/timnew/hexo-tag-asset-res) plugin to be installed.
+
+It also requires the `post_asset_folder: true` setting to be on.
 
 # Tumblr migrator
 
@@ -20,4 +24,4 @@ Execute the following command after installed. `source` is the file path or URL 
 $ hexo migrate tumblr <source> <consumer_key>
 ```
 
-[Hexo]: http://zespia.tw/hexo
+[Hexo]: http://hexo.io
