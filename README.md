@@ -24,4 +24,6 @@ Execute the following command after installed. `source` is the file path or URL 
 $ hexo migrate tumblr <source> <consumer_key>
 ```
 
+You can get a key by registering an App [here](https://www.tumblr.com/oauth/apps)
+
 [Hexo]: http://hexo.io
